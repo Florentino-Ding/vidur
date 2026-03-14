@@ -134,7 +134,8 @@ class BaseReplicaScheduler(ABC):
     def _get_next_batch(self) -> Batch:
         pass
 
-    def on_schedule(self) -> List[Batch]:
+    def on_schedule(self, time: float = 0.0) -> List[Batch]:
+        self._current_time = time
         scheduled_batches = []
         while self._num_running_batches < self._num_stages:
             batch = self._get_next_batch()

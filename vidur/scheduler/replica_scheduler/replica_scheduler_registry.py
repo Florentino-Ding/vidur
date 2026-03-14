@@ -1,3 +1,6 @@
+from vidur.scheduler.replica_scheduler.decode_length_predicted_replica_scheduler import (
+    DecodeLengthPredictedReplicaScheduler,
+)
 from vidur.scheduler.replica_scheduler.faster_transformer_replica_scheduler import (
     FasterTransformerReplicaScheduler,
 )
@@ -9,6 +12,9 @@ from vidur.scheduler.replica_scheduler.orca_replica_scheduler import (
 )
 from vidur.scheduler.replica_scheduler.sarathi_replica_scheduler import (
     SarathiReplicaScheduler,
+)
+from vidur.scheduler.replica_scheduler.static_batch_replica_scheduler import (
+    StaticBatchReplicaScheduler,
 )
 from vidur.scheduler.replica_scheduler.vllm_replica_scheduler import (
     VLLMReplicaScheduler,
@@ -29,4 +35,11 @@ ReplicaSchedulerRegistry.register(ReplicaSchedulerType.SARATHI, SarathiReplicaSc
 ReplicaSchedulerRegistry.register(ReplicaSchedulerType.VLLM, VLLMReplicaScheduler)
 ReplicaSchedulerRegistry.register(
     ReplicaSchedulerType.LIGHTLLM, LightLLMReplicaScheduler
+)
+ReplicaSchedulerRegistry.register(
+    ReplicaSchedulerType.STATIC_BATCH, StaticBatchReplicaScheduler
+)
+ReplicaSchedulerRegistry.register(
+    ReplicaSchedulerType.DECODE_LENGTH_PREDICTED,
+    DecodeLengthPredictedReplicaScheduler,
 )

@@ -54,7 +54,7 @@ class SklearnExecutionTimePredictor(BaseExecutionTimePredictor):
             if self._model_config.num_q_heads > self._model_config.num_kv_heads
             else 0
         )
-        if self._replica_scheduler_provider == "orca":
+        if self._replica_scheduler_provider in ("orca", "static_batch"):
             self._max_tokens = (
                 self._config.prediction_max_tokens_per_request
                 * self._config.prediction_max_batch_size

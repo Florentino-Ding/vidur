@@ -317,6 +317,14 @@ class FasterTransformerSchedulerConfig(BaseReplicaSchedulerConfig):
 
 
 @dataclass
+class StaticBatchSchedulerConfig(BaseReplicaSchedulerConfig):
+
+    @staticmethod
+    def get_type():
+        return ReplicaSchedulerType.STATIC_BATCH
+
+
+@dataclass
 class SarathiSchedulerConfig(BaseReplicaSchedulerConfig):
     chunk_size: int = field(
         default=512,
@@ -326,6 +334,37 @@ class SarathiSchedulerConfig(BaseReplicaSchedulerConfig):
     @staticmethod
     def get_type():
         return ReplicaSchedulerType.SARATHI
+
+
+@dataclass
+class DecodeLengthPredictedSchedulerConfig(BaseReplicaSchedulerConfig):
+    max_tokens_in_batch: int = field(
+        default=4096,
+        metadata={"help": "Maximum tokens in a single batch."},
+    )
+    prediction_latency_ms: float = field(
+        default=1.0,
+        metadata={"help": "Per-request prediction overhead in milliseconds."},
+    )
+    prediction_noise_std: float = field(
+        default=0.0,
+        metadata={
+            "help": (
+                "Std-dev (tokens) of Gaussian noise added to the decode-length "
+                "prediction. 0 = oracle/exact (use for debugging)."
+            )
+        },
+    )
+    similarity_tolerance: int = field(
+        default=100,
+        metadata={
+            "help": "Max token difference allowed between requests in the same batch."
+        },
+    )
+
+    @staticmethod
+    def get_type():
+        return ReplicaSchedulerType.DECODE_LENGTH_PREDICTED
 
 
 @dataclass

@@ -7,3 +7,5 @@ class ReplicaSchedulerType(BaseIntEnum):
     SARATHI = 3
     VLLM = 4
     LIGHTLLM = 5
+    STATIC_BATCH = 6
+    DECODE_LENGTH_PREDICTED = 7
